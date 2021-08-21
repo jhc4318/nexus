@@ -1,15 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import App from './App';
+import Header from './components/header';
+import Register from './components/register';
+import SignIn from './components/login';
+import SignOut from './components/logout';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+
+const routing = (
+	<Router>
+		<React.StrictMode>
+		<Header />
+		<Switch>
+			<Route exact path='/' component={App} />
+			<Route exact path='/register' component={Register} />
+			<Route exact path='/login' component={SignIn} />
+			<Route exact path='/logout' component={SignOut} />
+		</Switch>
+		{/* <Footer /> */}
+		</React.StrictMode>
+	</Router>
 );
+
+ReactDOM.render(routing, document.getElementById('root'));
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://cra.link/PWA
+serviceWorkerRegistration.unregister();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

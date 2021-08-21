@@ -1,25 +1,28 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import Tasks from './components/task';
+import TaskLoadingComponent from './components/taskLoading';
 
-function App() {
+
+export default function App() {
+  const TaskLoading = TaskLoadingComponent(Tasks);
+  const [appState, setAppState] = useState({
+    loading: false,
+    tasks: null,
+  });
+  useEffect(() => {
+    setAppState({ loading: true });
+    const apiUrl = 'http://127.0.0.1:8000/api/';
+    fetch(apiUrl)
+      .then((data) => data.json())
+      .then((tasks) => {
+        setAppState({ loading: false, tasks: tasks });
+    });
+  }, [setAppState]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <h1>Latest Tasks</h1>
+      <TaskLoading isLoading={appState.loading} tasks={appState.tasks} />
     </div>
   );
 }
-
-export default App;
