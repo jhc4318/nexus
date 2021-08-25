@@ -3,8 +3,9 @@ import axiosInstance from '../axios';
 // Material UI
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import Grid from '@material-ui/core/Grid';
+// Components
+import Task from './task';
 
 
 export default function TaskWrapper() {
@@ -21,20 +22,21 @@ export default function TaskWrapper() {
 
     return (
         <React.Fragment>
-            {tasks.map((task) => {
-                return (
-                    <Card>
-                        <CardContent>
-                            <Typography>
-                                {task.id}: {task.title}
-                            </Typography>
-                            <Typography>
-                                {task.info}
-                            </Typography>
-                        </CardContent>                 
-                    </Card>
-                );
-            })}
+            <CssBaseline />
+            <Typography
+                variant='h4'
+            >
+                Tasks
+            </Typography>
+            <Grid container alignItems='center'>
+                {tasks.map((task) => {
+                    return (
+                        <Grid item key={task.id} xs={12}>
+                            <Task id={task.id} title={task.title} info={task.info} />
+                        </Grid>
+                    );
+                })}
+            </Grid>
         </React.Fragment>
     );
 }
