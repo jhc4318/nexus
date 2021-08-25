@@ -12,7 +12,7 @@ const Tasks = (props) => {
     return (
         <React.Fragment>
             <Container maxWidth='md' component='main'>
-                <Grid container spacing={5} alighItems='flex-end'>
+                <Grid container spacing={5} alignItems='flex-end'>
                     {tasks.map((task) => {
                         return (
                             <Grid item key={task.id} xs={12} md={4}>
