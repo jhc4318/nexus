@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
-import TaskWrapper from './components/taskWrapper';
 // Material UI
 import Grid from '@material-ui/core/Grid';
+// Components
+import TaskWrapper from './components/taskWrapper';
 
 
 // sidebar, task wrapper, market wrapper

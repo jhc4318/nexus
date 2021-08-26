@@ -5,7 +5,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
-import Header from './components/header';
+import Overlay from './components/overlay';
 import Register from './components/register';
 import SignIn from './components/login';
 import SignOut from './components/logout';
@@ -14,7 +14,7 @@ import SignOut from './components/logout';
 const routing = (
 	<Router>
 		<React.StrictMode>
-		<Header />
+		<Overlay />
 		<Switch>
 			<Route exact path='/' component={App} />
 			<Route exact path='/register' component={Register} />
