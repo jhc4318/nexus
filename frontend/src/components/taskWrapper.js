@@ -10,6 +10,7 @@ import Task from './task';
 
 export default function TaskWrapper() {
     const [tasks, setTasks] = useState(null);
+
     useEffect(() => {
         axiosInstance
             .get('tasks/')
@@ -32,7 +33,7 @@ export default function TaskWrapper() {
                 {tasks.map((task) => {
                     return (
                         <Grid item key={task.id} xs={12}>
-                            <Task id={task.id} title={task.title} info={task.info} />
+                            <Task id={task.id} title={task.title} info={task.info} author={task.author} assigned_to={task.assigned_to} />
                         </Grid>
                     );
                 })}
