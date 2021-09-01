@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../axios';
 import jwt_decode from 'jwt-decode';
+import slugify from 'slugify';
 // Material UI
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
@@ -36,7 +37,7 @@ export default function TaskDisplay() {
         title: '',
         info: '',
         author: '',
-        // slug: '',
+        slug: '',
         assigned_to: [],
     });
 
@@ -67,25 +68,17 @@ export default function TaskDisplay() {
     const handleSubmit = (e) => {
         e.preventDefault();
         newTask.author = jwt_decode(localStorage.getItem('access_token')).user_id;
-        console.log(newTask.assigned_to)
-        let newusers = newTask.assigned_to.map((user) => {
-            return (
-                user
-            );
-        })
+        newTask.slug = slugify(newTask.title, { lower: true })
+        console.log(newTask);
 
-        console.log(newusers)
-
-
-        // console.log(newTask);
-        // axiosInstance
-        //     .post('tasks/', {
-        //         title: newTask.title,
-        //         info: newTask.info,
-        //         author: newTask.author,
-        //         // slug: newTask.slug,
-        //         assigned_to: newTask.assigned_to,
-        //     })
+        axiosInstance
+            .post('tasks/', {
+                title: newTask.title,
+                info: newTask.info,
+                author: newTask.author,
+                slug: newTask.slug,
+                assigned_to: newTask.assigned_to,
+            })
     };
 
     if (!users) return null;
@@ -112,20 +105,18 @@ export default function TaskDisplay() {
                     autoComplete="info"
                     onChange={handleTaskChange}
                 />
-                {/* <TextField 
-                    required
-                    fullWidth
-                    id="slug"
-                    label="Slug"
-                    name="slug"
-                    autoComplete="slug"
-                    onChange={handleTaskChange}
-                /> */}
                 <Select
                     multiple
                     input={<Input />}
                     value={newTask.assigned_to}
-                    renderValue={(selected) => selected.join(', ')}
+                    // fullWidth
+                    renderValue={(selected) => {
+                        let names = [];
+                        for (const index of selected) {
+                            names.push(users[index].user_name)
+                        }
+                        return names.join(', ')
+                    }}
                     onChange={handleAssigneesChange}
                 >
                     {users.map((user) => {
