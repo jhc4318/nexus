@@ -1,5 +1,6 @@
-from rest_framework import generics
-from rest_framework.permissions import BasePermission, IsAuthenticatedOrReadOnly, SAFE_METHODS
+from rest_framework import generics, viewsets
+from rest_framework.permissions import AllowAny, BasePermission, IsAuthenticated, IsAuthenticatedOrReadOnly, SAFE_METHODS
+from django.shortcuts import get_object_or_404
 from tasks.models import Task
 from .serializers import TaskSerializer
 
@@ -14,13 +15,25 @@ class TaskUserWritePermission(BasePermission):
         return obj.author == request.user
 
 
-class TaskList(generics.ListCreateAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
-    queryset = Task.objects.all()
+class TaskList(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
     serializer_class = TaskSerializer
 
+    def get_object(self, queryset=None, **kwargs):
+        item = self.kwargs.get('pk')
+        return get_object_or_404(Task, slug=item)
 
-class TaskDetail(generics.RetrieveUpdateDestroyAPIView, TaskUserWritePermission):
-    permission_classes = [TaskUserWritePermission]
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializer
+    def get_queryset(self):
+        return Task.objects.all()
+
+
+# class TaskList(generics.ListCreateAPIView):
+#     permission_classes = [AllowAny]
+#     queryset = Task.objects.all()
+#     serializer_class = TaskSerializer
+
+
+# class TaskDetail(generics.RetrieveUpdateDestroyAPIView, TaskUserWritePermission):
+#     permission_classes = [TaskUserWritePermission]
+#     queryset = Task.objects.all()
+#     serializer_class = TaskSerializer

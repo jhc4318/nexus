@@ -10,8 +10,7 @@ export default function SignOut() {
         const response = axiosInstance.post('users/logout/blacklist/', { // eslint-disable-line
             refresh_token: localStorage.getItem('refresh_token'),
         });
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
+        localStorage.clear();
         axiosInstance.defaults.headers['Authorization'] = null;
         history.push('/login');
     });

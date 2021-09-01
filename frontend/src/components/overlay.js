@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
+import axiosInstance from '../axios';
+import jwt_decode from 'jwt-decode';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -17,13 +19,11 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ListItemText from '@material-ui/core/ListItemText';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
-	root: {
-		display: 'flex',
-	},
 	toolbar: {
 		paddingRight: 24, // keep right padding when drawer closed
 	},
@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Overlay() {
 	const classes = useStyles();
-	const [open, setOpen] = React.useState(true);
+	const [open, setOpen] = useState(true);
 	const handleDrawerOpen = () => {
 		setOpen(true);
 	};
@@ -105,7 +105,7 @@ export default function Overlay() {
 	};
 
 	return (
-		<React.Fragment className={classes.root}>
+		<React.Fragment>
 			<CssBaseline />
 			<AppBar
 				position="absolute"
@@ -183,11 +183,26 @@ export default function Overlay() {
 					</IconButton>
 				</div>
 				<Divider />
-				<ListItem button>
+				<ListItem
+					button
+					component={NavLink}
+					to="/"
+				>
 					<ListItemIcon>
 						<DashboardIcon />
 					</ListItemIcon>
 					<ListItemText primary='Dashboard' />
+				</ListItem>
+				<Divider />
+				<ListItem 
+					button
+					component={NavLink}
+					to="/tasks"
+				>
+					<ListItemIcon>
+						<FormatListBulletedIcon />
+					</ListItemIcon>
+					<ListItemText primary='Tasks' />
 				</ListItem>
 				<Divider />
 			</Drawer>

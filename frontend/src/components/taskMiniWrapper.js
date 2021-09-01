@@ -5,10 +5,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 // Components
-import Task from './task';
+import TaskMini from './taskMini';
 
 
-export default function TaskWrapper() {
+export default function TaskMiniWrapper() {
     const [tasks, setTasks] = useState(null);
 
     useEffect(() => {
@@ -33,7 +33,7 @@ export default function TaskWrapper() {
                 {tasks.map((task) => {
                     return (
                         <Grid item key={task.id} xs={12}>
-                            <Task id={task.id} title={task.title} info={task.info} author={task.author} assigned_to={task.assigned_to} />
+                            <TaskMini id={task.id} title={task.title} info={task.info} author={task.author} assigned_to={task.assigned_to} />
                         </Grid>
                     );
                 })}

@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-export default function Task(props) {
+export default function TaskMini(props) {
     const classes = useStyles();
     const [author, setAuthor] = useState(null);
     const [users, setUsers] = useState([]);
@@ -49,7 +49,6 @@ export default function Task(props) {
     }, [props.assigned_to])
 
     if (!author) return null;
-    // console.log(users)
 
     return (
         <React.Fragment>

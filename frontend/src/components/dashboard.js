@@ -3,17 +3,17 @@ import './App.css';
 // Material UI
 import Grid from '@material-ui/core/Grid';
 // Components
-import TaskMiniWrapper from './components/taskMiniWrapper';
+import TaskWrapper from './components/taskWrapper';
 
 
 // sidebar, task wrapper, market wrapper
 
-export default function App() {
+export default function Dashboard() {
 	return (
 		<div className='App'>
 			<Grid container justifyContent='center' alignItems='center'>
 				<Grid item key='taskWrapper' xs={12} md={4}>
-					<TaskMiniWrapper />
+					<TaskWrapper />
 				</Grid>
 			</Grid>
 		</div>

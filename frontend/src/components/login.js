@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axiosInstance from '../axios';
 import { useHistory } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 //MaterialUI
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -65,8 +66,13 @@ export default function SignIn() {
 				axiosInstance.defaults.headers['Authorization'] =
 					'JWT ' + localStorage.getItem('access_token');
 				history.push('/');
-				//console.log(res);
-				//console.log(res.data);
+				
+				let decodedToken = jwt_decode(localStorage.getItem('access_token'));
+				axiosInstance
+					.get(`users/${decodedToken.user_id}`)
+					.then((res) => {
+						localStorage.setItem('user', JSON.stringify(res.data));
+					});
 			});
 	};
 
