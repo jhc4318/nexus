@@ -9,7 +9,8 @@ import Overlay from './components/overlay';
 import Register from './components/register';
 import SignIn from './components/login';
 import SignOut from './components/logout';
-import TaskDisplay from './components/tasks';
+import TaskDisplay from './components/taskDisplay';
+import UserDisplay from './components/userDisplay';
 
 
 const routing = (
@@ -19,6 +20,7 @@ const routing = (
 		<Switch>
 			<Route exact path='/' component={App} />
 			<Route exact path='/tasks' component={TaskDisplay} />
+			<Route exact path='/users' component={UserDisplay} />
 			<Route exact path='/register' component={Register} />
 			<Route exact path='/login' component={SignIn} />
 			<Route exact path='/logout' component={SignOut} />

@@ -20,6 +20,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ListItemText from '@material-ui/core/ListItemText';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import GroupIcon from '@material-ui/icons/Group';
 
 const drawerWidth = 240;
 
@@ -203,6 +204,17 @@ export default function Overlay() {
 						<FormatListBulletedIcon />
 					</ListItemIcon>
 					<ListItemText primary='Tasks' />
+				</ListItem>
+				<Divider />
+				<ListItem 
+					button
+					component={NavLink}
+					to="/users"
+				>
+					<ListItemIcon>
+						<GroupIcon />
+					</ListItemIcon>
+					<ListItemText primary='Users' />
 				</ListItem>
 				<Divider />
 			</Drawer>

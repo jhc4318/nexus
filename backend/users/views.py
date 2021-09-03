@@ -7,6 +7,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
 from users.models import User
 
+
 class UserList(generics.ListAPIView):
     permission_classes = [AllowAny]
     queryset = User.objects.all()
