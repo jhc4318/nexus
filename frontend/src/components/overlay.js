@@ -21,6 +21,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import ListItemText from '@material-ui/core/ListItemText';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import GroupIcon from '@material-ui/icons/Group';
+import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
 
 const drawerWidth = 240;
 
@@ -215,6 +216,17 @@ export default function Overlay() {
 						<GroupIcon />
 					</ListItemIcon>
 					<ListItemText primary='Users' />
+				</ListItem>
+				<Divider />
+				<ListItem 
+					button
+					component={NavLink}
+					to="/request-for-proposal"
+				>
+					<ListItemIcon>
+						<PriorityHighIcon />
+					</ListItemIcon>
+					<ListItemText primary='Request for Proposal' />
 				</ListItem>
 				<Divider />
 			</Drawer>

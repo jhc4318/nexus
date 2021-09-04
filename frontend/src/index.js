@@ -11,6 +11,7 @@ import SignIn from './components/login';
 import SignOut from './components/logout';
 import TaskDisplay from './components/taskDisplay';
 import UserDisplay from './components/userDisplay';
+import RequestForProposal from './components/RFP';
 
 
 const routing = (
@@ -19,6 +20,7 @@ const routing = (
 		<Overlay />
 		<Switch>
 			<Route exact path='/' component={App} />
+			<Route exact path='/request-for-proposal' component={RequestForProposal} />
 			<Route exact path='/tasks' component={TaskDisplay} />
 			<Route exact path='/users' component={UserDisplay} />
 			<Route exact path='/register' component={Register} />

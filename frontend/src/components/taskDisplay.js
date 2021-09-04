@@ -122,7 +122,7 @@ export default function TaskDisplay() {
                     {users.map((user) => {
                         return (
                             <MenuItem key={users.indexOf(user)} value={users.indexOf(user)}>
-                                <Checkbox checked={newTask.assigned_to.indexOf(user.user_name) > -1} />
+                                <Checkbox checked={newTask.assigned_to.indexOf(users.indexOf(user)) > -1} />
                                 <ListItemText primary={user.user_name} />
                             </MenuItem> 
                         );
@@ -135,7 +135,7 @@ export default function TaskDisplay() {
                     variant="outlined"
                     onClick={handleSubmit}
                 >
-                    Test
+                    Submit
                 </Button>
             </form>
             <TaskMiniWrapper /> 
