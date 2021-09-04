@@ -26,6 +26,9 @@ import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
+	root: {
+		display: 'flex',
+	},
 	toolbar: {
 		paddingRight: 24, // keep right padding when drawer closed
 	},
@@ -107,129 +110,131 @@ export default function Overlay() {
 	};
 
 	return (
-		<React.Fragment>
-			<CssBaseline />
-			<AppBar
-				position="absolute"
-				color="default"
-				className={clsx(classes.appBar, open && classes.appBarShift)}
-			>
-				<Toolbar className={classes.toolbar}>
-					<IconButton
-						edge='start'
-						color='inherit'
-						aria-label='open drawer'
-						onClick={handleDrawerOpen}
-						className={clsx(classes.menuButton, open && classes.buttonHidden)}
-					>
-						<MenuIcon />
-					</IconButton>
-					<Typography
-						variant="h6"
-						color="inherit"
-						noWrap
-						className={classes.toolbarTitle}
-					>
-						<Link
-							component={NavLink}
-							to="/"
-							underline="none"
-							color="textPrimary"
+		<div className={classes.root}>
+			<React.Fragment>
+				<CssBaseline />
+				<AppBar
+					position="absolute"
+					color="default"
+					className={clsx(classes.appBar, open && classes.appBarShift)}
+				>
+					<Toolbar className={classes.toolbar}>
+						<IconButton
+							edge='start'
+							color='inherit'
+							aria-label='open drawer'
+							onClick={handleDrawerOpen}
+							className={clsx(classes.menuButton, open && classes.buttonHidden)}
 						>
-							Nexus
-						</Link>
-					</Typography>
-					<nav>
-						<Link
-							color="textPrimary"
+							<MenuIcon />
+						</IconButton>
+						<Typography
+							variant="h6"
+							color="inherit"
+							noWrap
+							className={classes.toolbarTitle}
+						>
+							<Link
+								component={NavLink}
+								to="/"
+								underline="none"
+								color="textPrimary"
+							>
+								Nexus
+							</Link>
+						</Typography>
+						<nav>
+							<Link
+								color="textPrimary"
+								href="#"
+								className={classes.link}
+								component={NavLink}
+								to="/register"
+							>
+								Register
+							</Link>
+						</nav>
+						<Button
 							href="#"
+							color="primary"
+							variant="outlined"
 							className={classes.link}
 							component={NavLink}
-							to="/register"
+							to="/login"
 						>
-							Register
-						</Link>
-					</nav>
-					<Button
-						href="#"
-						color="primary"
-						variant="outlined"
-						className={classes.link}
+							Login
+						</Button>
+						<Button
+							href="#"
+							color="primary"
+							variant="outlined"
+							className={classes.link}
+							component={NavLink}
+							to="/logout"
+						>
+							Logout
+						</Button>
+					</Toolbar>
+				</AppBar>
+				<Drawer
+					variant='permanent'
+					classes={{
+						paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+					}}
+					open={open}
+				>
+					<div className={classes.toolbarIcon}>
+						<IconButton onClick={handleDrawerClose}>
+							<ChevronLeftIcon />
+						</IconButton>
+					</div>
+					<Divider />
+					<ListItem
+						button
 						component={NavLink}
-						to="/login"
+						to="/"
 					>
-						Login
-					</Button>
-					<Button
-						href="#"
-						color="primary"
-						variant="outlined"
-						className={classes.link}
+						<ListItemIcon>
+							<DashboardIcon />
+						</ListItemIcon>
+						<ListItemText primary='Dashboard' />
+					</ListItem>
+					<Divider />
+					<ListItem 
+						button
 						component={NavLink}
-						to="/logout"
+						to="/tasks"
 					>
-						Logout
-					</Button>
-				</Toolbar>
-			</AppBar>
-			<Drawer
-				variant='permanent'
-				classes={{
-					paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-				}}
-				open={open}
-			>
-				<div className={classes.toolbarIcon}>
-					<IconButton onClick={handleDrawerClose}>
-						<ChevronLeftIcon />
-					</IconButton>
-				</div>
-				<Divider />
-				<ListItem
-					button
-					component={NavLink}
-					to="/"
-				>
-					<ListItemIcon>
-						<DashboardIcon />
-					</ListItemIcon>
-					<ListItemText primary='Dashboard' />
-				</ListItem>
-				<Divider />
-				<ListItem 
-					button
-					component={NavLink}
-					to="/tasks"
-				>
-					<ListItemIcon>
-						<FormatListBulletedIcon />
-					</ListItemIcon>
-					<ListItemText primary='Tasks' />
-				</ListItem>
-				<Divider />
-				<ListItem 
-					button
-					component={NavLink}
-					to="/users"
-				>
-					<ListItemIcon>
-						<GroupIcon />
-					</ListItemIcon>
-					<ListItemText primary='Users' />
-				</ListItem>
-				<Divider />
-				<ListItem 
-					button
-					component={NavLink}
-					to="/request-for-proposal"
-				>
-					<ListItemIcon>
-						<PriorityHighIcon />
-					</ListItemIcon>
-					<ListItemText primary='Request for Proposal' />
-				</ListItem>
-				<Divider />
-			</Drawer>
-		</React.Fragment>
+						<ListItemIcon>
+							<FormatListBulletedIcon />
+						</ListItemIcon>
+						<ListItemText primary='Tasks' />
+					</ListItem>
+					<Divider />
+					<ListItem 
+						button
+						component={NavLink}
+						to="/users"
+					>
+						<ListItemIcon>
+							<GroupIcon />
+						</ListItemIcon>
+						<ListItemText primary='Users' />
+					</ListItem>
+					<Divider />
+					<ListItem 
+						button
+						component={NavLink}
+						to="/request-for-proposal"
+					>
+						<ListItemIcon>
+							<PriorityHighIcon />
+						</ListItemIcon>
+						<ListItemText primary='Request for Proposal' />
+					</ListItem>
+					<Divider />
+				</Drawer>
+			</React.Fragment>
+		</div>
 	);
 }

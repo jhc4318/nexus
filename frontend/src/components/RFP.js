@@ -3,15 +3,8 @@ import axiosInstance from '../axios';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Section from './RFPsection';
 
-
-function Section() {
-    return (
-        <React.Fragment>
-            
-        </React.Fragment>
-    );
-};
 
 export default function RequestForProposal() {
     const [sections, setSections] = useState(null)
@@ -35,13 +28,9 @@ export default function RequestForProposal() {
                 RFP
             </Typography>
             <Grid container alignItems='center'>
-                {sections.map((section) => {
-                    return (
-                        <Grid item key={section.id} xs={12}>
-                            {section.title}
-                        </Grid>
-                    );
-                })}
+                <Grid item key={"main"} xs={12}>
+                    <Section id={1} />
+                </Grid>
             </Grid>
         </React.Fragment>
     );

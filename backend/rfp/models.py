@@ -16,7 +16,7 @@ class Section(models.Model):
     sectionobjects = SectionObjects()
 
     class Meta:
-        ordering = ('-updated',)
+        ordering = ('updated',)
 
     def __str__(self):
         return self.title
