@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'tasks',
     'users',
     'rfp',
+    'market',
     'rest_framework_simplejwt.token_blacklist',
 ]
 
