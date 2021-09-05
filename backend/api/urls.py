@@ -11,4 +11,5 @@ urlpatterns = [
     path('api/users/', include('users.urls', namespace='users')),
     path('api/rfp/', include('rfp.urls', namespace='rfp')),
     path('api/market/', include('market.urls', namespace='market')),
+    path('api/company/', include('company.urls', namespace='company')),
 ]

@@ -75,3 +75,5 @@ class Item(models.Model):
     class Meta:
         ordering = ('product',)
 
+    def __str__(self):
+        return f"{self.product.name} [{self.subcontractor.name}, {self.location.name}] - £{self.price}"
