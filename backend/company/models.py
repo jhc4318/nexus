@@ -19,8 +19,8 @@ class Account(models.Model):
 
     @property
     def total_price(self):
-        item_object = self.item
-        return self.quantity * item_object.price
+        return self.quantity * self.item.price
 
     objects = models.Manager()
     accountobjects = AccountObjects()
+
