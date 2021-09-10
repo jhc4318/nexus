@@ -197,6 +197,7 @@ export default function App() {
 						<Divider />
 					</Drawer>
 					<Switch>
+						{/* Add redirect to /login if notAuthenticated */}
 						<Route exact path='/login' component={SignIn} />
 						<Route exact path='/bye'>bye</Route>
 					</Switch>	
