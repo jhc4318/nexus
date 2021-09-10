@@ -20,12 +20,25 @@ import MenuIcon from '@material-ui/icons/Menu';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import GroupIcon from '@material-ui/icons/Group';
 import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
-import TaskDisplay from './components/taskDisplay';
+import SignIn from './components/login';
 
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
+	root: {
+		display: 'flex',
+	},
+	toolbar: {
+		paddingRight: 24, // keep right padding when drawer closed
+	},
+	toolbarIcon: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'flex-end',
+		padding: '0 8px',
+		...theme.mixins.toolbar,
+	},
 	appBar: {
 		zIndex: theme.zIndex.drawer + 1,
 		transition: theme.transitions.create(['width', 'margin'], {
@@ -41,7 +54,15 @@ const useStyles = makeStyles((theme) => ({
 			duration: theme.transitions.duration.enteringScreen,
 		}),
 	},
-	appBarSpacer: theme.mixins.toolbar,
+	menuButton: {
+		marginRight: 36,
+	},
+	menuButtonHidden: {
+		display: 'none',
+	},
+	title: {
+		flexGrow: 1,
+	},
 	drawerPaper: {
 		position: 'relative',
 		whiteSpace: 'nowrap',
@@ -53,43 +74,35 @@ const useStyles = makeStyles((theme) => ({
 	},
 	drawerPaperClose: {
 		overflowX: 'hidden',
-		width: theme.spacing(7),
-		[theme.breakpoints.up('sm')]: {
-			width: theme.spacing(9),
-		},
 		transition: theme.transitions.create('width', {
 			easing: theme.transitions.easing.sharp,
 			duration: theme.transitions.duration.leavingScreen,
 		}),
+		width: theme.spacing(7),
+		[theme.breakpoints.up('sm')]: {
+			width: theme.spacing(9),
+		},
 	},
-	toolbar: {
-		paddingRight: 24, // Keep right padding when drawer closed
-	},
-	toolbarIcon: {
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'flex-end',
-		padding: '0 8px',
-		...theme.mixins.toolbar,
-	},
-	menuButton: {
-		marginRight: 36,
-	},
-	menuButtonHide: {
-		display: 'none',
-	},
-	paper: {
-		padding: theme.spacing(2),
-		overflow: 'auto',
-		flexDirection: 'column',
-	},
+	appBarSpacer: theme.mixins.toolbar,
 	content: {
 		flexGrow: 1,
 		height: '100vh',
 		overflow: 'auto',
-	}
+	},
+	container: {
+		paddingTop: theme.spacing(4),
+		paddingBottom: theme.spacing(4),
+	},
+	paper: {
+		padding: theme.spacing(2),
+		display: 'flex',
+		overflow: 'auto',
+		flexDirection: 'column',
+	},
+	fixedHeight: {
+	  	height: 240,
+	},
 }));
-
 
 export default function App() {
 	const classes = useStyles();
@@ -102,91 +115,93 @@ export default function App() {
 	};
 
 	return (
-		<Router>
+		<div className={classes.root}>
 			<React.StrictMode>
-			<CssBaseline />
-			<AppBar 
-				position="absolute"
-				color="default"
-				className={clsx(classes.appBar, open && classes.appBarShift)}
-			>
-				<Toolbar className={classes.toolbar}>
-					<IconButton
-						edge='start'
-						color='inherit'
-						aria-label='open drawer'
-						onClick={handleDrawerOpen}
-						className={clsx(classes.menuButton, open && classes.menuButtonHide)}
+				<Router>
+					<CssBaseline />
+					<AppBar 
+						position="absolute"
+						color="default"
+						className={clsx(classes.appBar, open && classes.appBarShift)}
 					>
-						<MenuIcon />
-					</IconButton>
-				</Toolbar>
-			</AppBar>
-			<Drawer 
-				variant="permanent"
-				className={{
-					paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-				}}
-				open={open}
-			>
-				<div className={classes.toolbarIcon}>
-					<IconButton 
-						onClick={handleDrawerClose}
+						<Toolbar className={classes.toolbar}>
+							<IconButton
+								edge='start'
+								color='inherit'
+								aria-label='open drawer'
+								onClick={handleDrawerOpen}
+								className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+							>
+								<MenuIcon />
+							</IconButton>
+						</Toolbar>
+					</AppBar>
+					<Drawer 
+						variant="permanent"
+						classes={{
+							paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+						}}
+						open={open}
 					>
-						<ChevronLeftIcon />
-					</IconButton>
-				</div>	
-				<Divider />
-				<ListItem
-					button
-					component={NavLink}
-					to='/'
-				>
-					<ListItemIcon>
-						<DashboardIcon />
-					</ListItemIcon>
-					<ListItemText primary='Dashboard' />
-				</ListItem>
-				<Divider />
-				<ListItem
-					button
-					component={NavLink}
-					to='/tasks'
-				>
-					<ListItemIcon>
-						<FormatListBulletedIcon />
-					</ListItemIcon>
-					<ListItemText primary='Tasks' />
-				</ListItem>
-				<Divider />
-				<ListItem
-					button
-					component={NavLink}
-					to='/users'
-				>
-					<ListItemIcon>
-						<GroupIcon />
-					</ListItemIcon>
-					<ListItemText primary='Users' />
-				</ListItem>
-				<Divider />
-				<ListItem
-					button
-					component={NavLink}
-					to='/request-for-proposal'
-				>
-					<ListItemIcon>
-						<PriorityHighIcon />
-					</ListItemIcon>
-					<ListItemText primary='Request for Proposal' />
-				</ListItem>
-				<Divider />
-			</Drawer>
-			<Switch>
-				<Route exact path='/tasks' component={TaskDisplay } />
-				<Route exact path='/bye'>bye</Route>
-			</Switch>
+						<div className={classes.toolbarIcon}>
+							<IconButton 
+								onClick={handleDrawerClose}
+							>
+								<ChevronLeftIcon />
+							</IconButton>
+						</div>	
+						<Divider />
+						<ListItem
+							button
+							component={NavLink}
+							to='/'
+						>
+							<ListItemIcon>
+								<DashboardIcon />
+							</ListItemIcon>
+							<ListItemText primary='Dashboard' />
+						</ListItem>
+						<Divider />
+						<ListItem
+							button
+							component={NavLink}
+							to='/tasks'
+						>
+							<ListItemIcon>
+								<FormatListBulletedIcon />
+							</ListItemIcon>
+							<ListItemText primary='Tasks' />
+						</ListItem>
+						<Divider />
+						<ListItem
+							button
+							component={NavLink}
+							to='/users'
+						>
+							<ListItemIcon>
+								<GroupIcon />
+							</ListItemIcon>
+							<ListItemText primary='Users' />
+						</ListItem>
+						<Divider />
+						<ListItem
+							button
+							component={NavLink}
+							to='/request-for-proposal'
+						>
+							<ListItemIcon>
+								<PriorityHighIcon />
+							</ListItemIcon>
+							<ListItemText primary='Request for Proposal' />
+						</ListItem>
+						<Divider />
+					</Drawer>
+					<Switch>
+						<Route exact path='/login' component={SignIn} />
+						<Route exact path='/bye'>bye</Route>
+					</Switch>	
+				</Router>
 			</React.StrictMode>
-		</Router>
+		</div>
 	);
 }
