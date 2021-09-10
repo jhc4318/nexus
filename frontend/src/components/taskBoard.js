@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function TaskDisplay() {
+export default function TaskBoard() {
     const classes = useStyles();
     const [users, setUsers] = useState(null);
     const initNewTask = Object.freeze({

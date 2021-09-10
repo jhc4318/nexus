@@ -23,4 +23,3 @@ class Account(models.Model):
 
     objects = models.Manager()
     accountobjects = AccountObjects()
-

@@ -1,38 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
-import Overlay from './components/overlay';
-import Register from './components/register';
-import SignIn from './components/login';
-import SignOut from './components/logout';
-import TaskDisplay from './components/taskDisplay';
-import UserDisplay from './components/userDisplay';
-import RequestForProposal from './components/RFP';
 
+const app = (
+	<React.Fragment>
+		<App />
+	</React.Fragment>
+)
 
-const routing = (
-	<Router>
-		<React.StrictMode>
-		<Overlay />
-		<Switch>
-			<Route exact path='/' component={App} />
-			<Route exact path='/request-for-proposal' component={RequestForProposal} />
-			<Route exact path='/tasks' component={TaskDisplay} />
-			<Route exact path='/users' component={UserDisplay} />
-			<Route exact path='/register' component={Register} />
-			<Route exact path='/login' component={SignIn} />
-			<Route exact path='/logout' component={SignOut} />
-		</Switch>
-		{/* <Footer /> */}
-		</React.StrictMode>
-	</Router>
-);
-
-ReactDOM.render(routing, document.getElementById('root'));
+ReactDOM.render(app, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
