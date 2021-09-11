@@ -140,6 +140,7 @@ export default function App() {
 							>
 								<MenuIcon />
 							</IconButton>
+							{/* Text corresponding to opened page? */}
 						</Toolbar>
 					</AppBar>
 					<Drawer 
@@ -202,12 +203,15 @@ export default function App() {
 						</ListItem>
 						<Divider />
 					</Drawer>
-					<Switch>
-						<Route exact path='/login' component={SignIn} />
-						<PrivateRoute path='/'>
-							<Route exact path='/tasks' component={TaskBoard} />
-						</PrivateRoute>
-					</Switch>	
+					<main className={classes.content}>
+						<div className={classes.appBarSpacer} />
+						<Switch>
+							<Route exact path='/login' component={SignIn} />
+							<PrivateRoute path='/'>
+								<Route exact path='/tasks' component={TaskBoard} />
+							</PrivateRoute>
+						</Switch>
+					</main>
 				</Router>
 			</React.StrictMode>
 		</div>

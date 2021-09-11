@@ -7,7 +7,7 @@ export default function PrivateRoute ({ children, ...rest }) {
 
     const isAuthenticated = () => {
         try {
-            jwt_decode(localStorage.getItem('access_token'));
+            jwt_decode(localStorage.getItem('refresh_token'));
             return true;
         } catch {
             console.log("Not authenticated");

@@ -1,5 +1,5 @@
-Backend
 - Add frontend page for markets, company members (refine users page)
 - Add backend user hierarchy
 - Improve taskBoard display
-- 
+- Add task status to model
+- Filter tasks via user
