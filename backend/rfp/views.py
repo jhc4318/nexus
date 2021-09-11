@@ -1,14 +1,14 @@
 from .serializers import SectionSerializer
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rfp.models import Section
 
 
-class SectionList(viewsets.ModelViewSet):
+class SectionViewset(viewsets.ModelViewSet):
     queryset = Section.objects.all()
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     serializer_class = SectionSerializer
 
     @action(detail=True)

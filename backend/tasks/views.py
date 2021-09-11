@@ -15,8 +15,8 @@ class TaskUserWritePermission(BasePermission):
         return obj.author == request.user
 
 
-class TaskList(viewsets.ModelViewSet):
-    permission_classes = [AllowAny]
+class TaskViewset(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     serializer_class = TaskSerializer
 
     def get_object(self, queryset=None, **kwargs):

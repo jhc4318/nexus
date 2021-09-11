@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { 
+	BrowserRouter as Router,
+	Switch,
+	Route,
+} from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
 import {
@@ -21,6 +25,8 @@ import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import GroupIcon from '@material-ui/icons/Group';
 import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
 import SignIn from './components/login';
+import PrivateRoute from './components/privateRoute';
+import TaskBoard from './components/taskBoard';
 
 
 const drawerWidth = 240;
@@ -197,9 +203,10 @@ export default function App() {
 						<Divider />
 					</Drawer>
 					<Switch>
-						{/* Add redirect to /login if notAuthenticated */}
 						<Route exact path='/login' component={SignIn} />
-						<Route exact path='/bye'>bye</Route>
+						<PrivateRoute path='/'>
+							<Route exact path='/tasks' component={TaskBoard} />
+						</PrivateRoute>
 					</Switch>	
 				</Router>
 			</React.StrictMode>
