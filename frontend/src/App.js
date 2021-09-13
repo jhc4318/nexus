@@ -27,6 +27,7 @@ import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
 import SignIn from './components/login';
 import PrivateRoute from './components/privateRoute';
 import TaskBoard from './components/taskBoard';
+import RequestForProposal from './components/RFP';
 
 
 const drawerWidth = 240;
@@ -209,6 +210,7 @@ export default function App() {
 							<Route exact path='/login' component={SignIn} />
 							<PrivateRoute path='/'>
 								<Route exact path='/tasks' component={TaskBoard} />
+								<Route exact path='/request-for-proposal' component={RequestForProposal} />
 							</PrivateRoute>
 						</Switch>
 					</main>

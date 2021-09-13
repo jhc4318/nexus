@@ -81,7 +81,6 @@ export default function TaskBoard() {
         e.preventDefault();
         newTask.author = jwt_decode(localStorage.getItem('access_token')).user_id;
         newTask.slug = slugify(newTask.title, { lower: true })
-        console.log(newTask);
 
         axiosInstance
             .post('tasks/', {
@@ -90,6 +89,7 @@ export default function TaskBoard() {
                 author: newTask.author,
                 slug: newTask.slug,
                 assigned_to: newTask.assigned_to,
+                status: "in_progress",
             })
     };
 

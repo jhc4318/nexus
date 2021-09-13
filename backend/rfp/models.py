@@ -9,6 +9,7 @@ class Section(models.Model):
             return super().get_queryset()
 
     title = models.CharField(max_length=250)
+    # Could add a number id to use for ordering
     info = models.TextField(blank=True)
     updated = models.DateTimeField(default=timezone.now)
     parentsection = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)

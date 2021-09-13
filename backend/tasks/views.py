@@ -19,10 +19,6 @@ class TaskViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = TaskSerializer
 
-    def get_object(self, queryset=None, **kwargs):
-        item = self.kwargs.get('pk')
-        return get_object_or_404(Task, slug=item)
-
     def get_queryset(self):
         return Task.objects.all()
 
