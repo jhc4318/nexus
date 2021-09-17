@@ -17,14 +17,19 @@ import {
     TextField, 
     Typography
 } from '@material-ui/core';
-import TaskMiniWrapper from './taskMiniWrapper';
+import TaskCardWrapper from './taskCardWrapper';
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        display: 'flex',
         alignItems: 'center',
         flexDirection: 'column',
+    },
+    card: {
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 10,
+        marginBottom: 10,
     },
     paper: {
         display: 'flex',
@@ -40,6 +45,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'column',
+        marginLeft: 10,
+        marginRight: 10,
     },
 }));
 
@@ -99,32 +106,34 @@ export default function TaskBoard() {
         <div className={classes.root}>
             <React.Fragment>
                 <CssBaseline />
-                <form noValidate>
-                    <Grid container alignItems='center'>
-                        <Grid item xs={12}>
-                            <Card>
-                                <CardContent>
-                                    <Typography>
-                                        Enter new task
-                                    </Typography>
+                <Card variant='outlined' className={classes.card}>
+                    <CardContent>
+                        <form noValidate>
+                            <Grid container>
+                                <Grid item xs={12} >
                                     <TextField 
                                         required
                                         fullWidth
                                         id="title"
-                                        label="Title"
+                                        label="New task title"
                                         name="title"
                                         autoComplete="title"
                                         onChange={handleTaskChange}
                                     />
+                                </Grid>
+                                <Grid item xs={12}>
                                     <TextField 
                                         required
                                         fullWidth
+                                        multiline
                                         id="info"
                                         label="Info"
                                         name="info"
                                         autoComplete="info"
                                         onChange={handleTaskChange}
                                     />
+                                </Grid>
+                                <Grid item xs={10}>
                                     <Select
                                         className={classes.selectNames}
                                         multiple
@@ -149,6 +158,8 @@ export default function TaskBoard() {
                                             );
                                         })}
                                     </Select>
+                                </Grid>
+                                <Grid item xs={2}>
                                     <Button
                                         className={classes.button}
                                         href="#"
@@ -158,12 +169,12 @@ export default function TaskBoard() {
                                     >
                                         Submit
                                     </Button>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                    </Grid>     
-                </form>
-                <TaskMiniWrapper /> 
+                                </Grid>
+                            </Grid>
+                        </form>
+                    </CardContent>
+                </Card>
+                <TaskCardWrapper /> 
             </React.Fragment>
         </div> 
     );

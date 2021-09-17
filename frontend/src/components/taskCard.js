@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function TaskMini(props) {
+export default function TaskCard(props) {
     const classes = useStyles();
 
     const [task, setTask] = useState(null);

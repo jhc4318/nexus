@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from '../axios';
 // Material UI
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 // Components
-import TaskMini from './taskMini';
+import TaskCard from './taskCard';
 
 
-export default function TaskMiniWrapper() {
+export default function TaskCardWrapper() {
     const [tasks, setTasks] = useState(null);
 
     useEffect(() => {
@@ -24,16 +23,11 @@ export default function TaskMiniWrapper() {
     return (
         <React.Fragment>
             <CssBaseline />
-            <Typography
-                variant='h4'
-            >
-                Tasks
-            </Typography>
             <Grid container alignItems='center'>
                 {tasks.map((task) => {
                     return (
                         <Grid item key={task.id} xs={12}>
-                            <TaskMini id={task.id} />
+                            <TaskCard id={task.id} />
                         </Grid>
                     );
                 })}
