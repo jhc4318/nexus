@@ -2,19 +2,25 @@ import React, { useEffect, useState } from 'react';
 import axiosInstance from '../axios';
 import jwt_decode from 'jwt-decode';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import { Checkbox, FormControlLabel } from '@material-ui/core';
+import { 
+    Card, 
+    CardContent, 
+    Checkbox, 
+    CssBaseline, 
+    FormControlLabel, 
+    Grid, 
+    Typography 
+} from '@material-ui/core';
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     card: {
-        display: 'flex',
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 10,
+        marginBottom: 10,
     },
     taskID: {
-        // textAlign: 'right',
         fontStyle: 'italic',  
     },
     taskTitle: {
@@ -22,11 +28,12 @@ const useStyles = makeStyles(() => ({
     },
     taskAuthor: {
         textAlign: 'left',
+        padding: theme.spacing(1),
         fontStyle: 'italic', 
     },
     checkbox: {
-        display: 'flex',
-        justifyContent: 'flex-end',
+        justifyContent: 'end',
+        textAlign: 'right',
     }
 }));
 
@@ -99,62 +106,69 @@ export default function TaskMini(props) {
     return (
         <React.Fragment>
             <CssBaseline>
-                <Card>
+                <Card className={classes.card}>
                     <CardContent>
-                        <span className={classes.taskID}>
+                        <Grid container>
+                            <Grid item xs={12}>
+                                <span className={classes.taskID}>
+                                    <Typography
+                                        variant='subtitle1' 
+                                        display='inline'
+                                        color='textSecondary'
+                                    >
+                                        {task.id} -{" "}
+                                    </Typography>
+                                </span>
                                 <Typography
-                                variant='subtitle1' 
-                                display='inline'
-                                color='textSecondary'
-                            >
-                                {task.id} -{" "}
-                            </Typography>
-                        </span>
-                        <Typography
-                            noWrap={true}
-                            variant='subtitle1'
-                            align='left'
-                            display='inline'
-                        >
-                            {task.title}
-                        </Typography>
-                        <Typography
-                            noWrap={true}
-                            variant='body2'
-                            align='left'
-                        >
-                            {task.info}
-                        </Typography>
-                        <div className={classes.taskAuthor}>
-                            <Typography
-                                variant='caption' 
-                                display='inline'
-                            >
-                                Created by {author.user_name} {"for "}
-                            </Typography>
-                            <Typography
-                                variant='caption' 
-                                display='inline'
-                            >
-                                {users.map((user) => {
-                                    return (
-                                        `${user.user_name} `
-                                    );
-                                })}  
-                            </Typography>
-                            <FormControlLabel
-                                className={classes.checkbox}
-                                label="Mark as completed"
-                                labelPlacement="start"
-                                control={<Checkbox 
-                                    checked={complete}  
-                                    onChange={handleCheckbox} 
-                                    name="complete" 
-                                    disabled={!((task.assigned_to.includes(currentUser)) || (task.author===currentUser))}
-                                />}
-                            />
-                        </div>
-                    </CardContent>                 
+                                    noWrap={true}
+                                    variant='subtitle1'
+                                    align='left'
+                                    display='inline'
+                                >
+                                    {task.title}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Typography
+                                    noWrap={false}
+                                    variant='body2'
+                                    align='left'
+                                >
+                                    {task.info}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={8} className={classes.taskAuthor}>
+                                <Typography
+                                    variant='body2' 
+                                    display='inline'
+                                >
+                                    Created by {author.user_name} {"for "}
+                                </Typography>
+                                <Typography
+                                    variant='body2' 
+                                    display='inline'
+                                >
+                                    {users.map((user) => {
+                                        return (
+                                            `${user.user_name} `
+                                        );
+                                    })}  
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <FormControlLabel
+                                    label="Mark as completed"
+                                    labelPlacement="start"
+                                    control={<Checkbox 
+                                        checked={complete}  
+                                        onChange={handleCheckbox} 
+                                        name="complete" 
+                                        disabled={!((task.assigned_to.includes(currentUser)) || (task.author===currentUser))}
+                                    />}
+                                />
+                            </Grid>
+                        </Grid>
+                    </CardContent>
                 </Card>
             </CssBaseline>
         </React.Fragment>

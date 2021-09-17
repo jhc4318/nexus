@@ -33,7 +33,7 @@ export default function TaskMiniWrapper() {
                 {tasks.map((task) => {
                     return (
                         <Grid item key={task.id} xs={12}>
-                            <TaskMini id={task.id} title={task.title} info={task.info} author={task.author} assigned_to={task.assigned_to} status={task.status} slug={task.slug} />
+                            <TaskMini id={task.id} />
                         </Grid>
                     );
                 })}

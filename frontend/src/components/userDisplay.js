@@ -32,7 +32,6 @@ export default function UserDisplay() {
                     );
                 })}
             </Grid>
-            Hi
         </React.Fragment>
     );
 }

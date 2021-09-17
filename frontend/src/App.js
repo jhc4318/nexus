@@ -16,6 +16,7 @@ import {
 	ListItemIcon,  
 	ListItemText,  
 	Toolbar,
+	Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -28,6 +29,7 @@ import SignIn from './components/login';
 import PrivateRoute from './components/privateRoute';
 import TaskBoard from './components/taskBoard';
 import RequestForProposal from './components/RFP';
+import UserDisplay from './components/userDisplay';
 
 
 const drawerWidth = 240;
@@ -141,7 +143,15 @@ export default function App() {
 							>
 								<MenuIcon />
 							</IconButton>
-							{/* Text corresponding to opened page? */}
+							<Typography
+								component="h1"
+								variant="h6"
+								color="inherit"
+								noWrap
+								sx={{ flexGrow: 1}}
+							>
+								{`Nexus`}
+							</Typography>
 						</Toolbar>
 					</AppBar>
 					<Drawer 
@@ -211,6 +221,7 @@ export default function App() {
 							<PrivateRoute path='/'>
 								<Route exact path='/tasks' component={TaskBoard} />
 								<Route exact path='/request-for-proposal' component={RequestForProposal} />
+								<Route exact path='/users' component={UserDisplay} />
 							</PrivateRoute>
 						</Switch>
 					</main>
