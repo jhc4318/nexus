@@ -15,7 +15,6 @@ import {
     MenuItem, 
     Select, 
     TextField, 
-    Typography
 } from '@material-ui/core';
 import TaskCardWrapper from './taskCardWrapper';
 

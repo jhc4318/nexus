@@ -25,11 +25,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import GroupIcon from '@material-ui/icons/Group';
 import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SignIn from './components/login';
 import PrivateRoute from './components/privateRoute';
 import TaskBoard from './components/taskBoard';
 import RequestForProposal from './components/RFP';
 import UserDisplay from './components/userDisplay';
+import MarketBoard from './components/marketBoard';
 
 
 const drawerWidth = 240;
@@ -213,6 +215,17 @@ export default function App() {
 							<ListItemText primary='Request for Proposal' />
 						</ListItem>
 						<Divider />
+						<ListItem
+							button
+							component={NavLink}
+							to='/market'
+						>
+							<ListItemIcon>
+								<ShoppingCartIcon />
+							</ListItemIcon>
+							<ListItemText primary='Market' />
+						</ListItem>
+						<Divider />
 					</Drawer>
 					<main className={classes.content}>
 						<div className={classes.appBarSpacer} />
@@ -222,6 +235,7 @@ export default function App() {
 								<Route exact path='/tasks' component={TaskBoard} />
 								<Route exact path='/request-for-proposal' component={RequestForProposal} />
 								<Route exact path='/users' component={UserDisplay} />
+								<Route exact path='/market' component={MarketBoard} />
 							</PrivateRoute>
 						</Switch>
 					</main>
