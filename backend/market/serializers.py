@@ -23,4 +23,4 @@ class LocationSerializer(serializers.ModelSerializer):
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
-        fields = ('id', 'subcontractor', 'product', 'location', 'price')
+        fields = ('id', 'subcontractor', 'product', 'location', 'price', 'name')

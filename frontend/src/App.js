@@ -26,12 +26,14 @@ import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import GroupIcon from '@material-ui/icons/Group';
 import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import SignIn from './components/login';
 import PrivateRoute from './components/privateRoute';
 import TaskBoard from './components/taskBoard';
 import RequestForProposal from './components/RFP';
 import UserDisplay from './components/userDisplay';
 import MarketBoard from './components/marketBoard';
+import AccountsBoard from './components/accountsBoard';
 
 
 const drawerWidth = 240;
@@ -226,6 +228,17 @@ export default function App() {
 							<ListItemText primary='Market' />
 						</ListItem>
 						<Divider />
+						<ListItem
+							button
+							component={NavLink}
+							to='/accounts'
+						>
+							<ListItemIcon>
+								<AccountBalanceWalletIcon />
+							</ListItemIcon>
+							<ListItemText primary='Accounts' />
+						</ListItem>
+						<Divider />
 					</Drawer>
 					<main className={classes.content}>
 						<div className={classes.appBarSpacer} />
@@ -236,6 +249,7 @@ export default function App() {
 								<Route exact path='/request-for-proposal' component={RequestForProposal} />
 								<Route exact path='/users' component={UserDisplay} />
 								<Route exact path='/market' component={MarketBoard} />
+								<Route exact path='/accounts' component={AccountsBoard} />
 							</PrivateRoute>
 						</Switch>
 					</main>

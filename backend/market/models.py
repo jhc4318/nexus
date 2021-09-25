@@ -69,8 +69,12 @@ class Item(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=15, decimal_places=2) # in £/unit
-    objects=models.Manager()
+    objects = models.Manager()
     itemobjects = ItemObjects()
+
+    @property
+    def name(self):
+        return f"{self.product.name} [{self.subcontractor.name}, {self.location.name}] - £{self.price}"
 
     class Meta:
         ordering = ('product',)
