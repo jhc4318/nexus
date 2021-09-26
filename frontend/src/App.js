@@ -119,6 +119,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function App() {
 	const classes = useStyles();
+	
 	const [open, setOpen] = useState(true);
 	const handleDrawerClose = () => {
 		setOpen(false);
@@ -126,6 +127,9 @@ export default function App() {
 	const handleDrawerOpen = () => {
 		setOpen(true);
 	};
+
+	// let location = useLocation();
+	// console.log(location);
 
 	return (
 		<div className={classes.root}>
@@ -156,6 +160,7 @@ export default function App() {
 							>
 								{`Nexus`}
 							</Typography>
+							
 						</Toolbar>
 					</AppBar>
 					<Drawer 

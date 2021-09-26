@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import axiosInstance from '../axios';
+import { makeStyles } from '@material-ui/core';
 
+
+const useStyles = makeStyles((theme) => ({
+    table: {
+        margin: 10,
+    },
+}));
 
 const columns = [
 	{ 
@@ -36,6 +43,8 @@ function capitalizeFirstLetter(word) {
 };
 
 export default function AccountsBoard() {
+    const classes = useStyles();
+
 	const [items, setItems] = useState(null);
 	useEffect(() => {
 		axiosInstance
@@ -60,6 +69,7 @@ export default function AccountsBoard() {
 	return (
 		<React.Fragment>
 			<DataGrid 
+                className={classes.table}
 				columns={columns}
 				rows={accounts.map((account) => {
 					return ({

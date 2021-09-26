@@ -10,6 +10,7 @@ import {
     CssBaseline, 
     Grid, 
     Input, 
+    InputLabel, 
     ListItemText, 
     makeStyles, 
     MenuItem, 
@@ -108,7 +109,7 @@ export default function TaskBoard() {
                 <Card variant='outlined' className={classes.card}>
                     <CardContent>
                         <form noValidate>
-                            <Grid container>
+                            <Grid container spacing={1}>
                                 <Grid item xs={12} >
                                     <TextField 
                                         required
@@ -133,12 +134,14 @@ export default function TaskBoard() {
                                     />
                                 </Grid>
                                 <Grid item xs={10}>
+                                    <InputLabel id="assignees-label">Assign to</InputLabel>
                                     <Select
+                                        labelId="assignees-label"
                                         className={classes.selectNames}
                                         multiple
+                                        id="assignees"
                                         input={<Input />}
                                         value={newTask.assigned_to}
-                                        // fullWidth
                                         renderValue={(selected) => {
                                             let names = [];
                                             for (const index of selected) {
