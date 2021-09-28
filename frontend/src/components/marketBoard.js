@@ -56,6 +56,7 @@ const columns = [
 export default function MarketBoard() {
 	const classes = useStyles();
 	const [quantity, setQuantity] = useState(null);
+	const [selectedItem, setSelectedItem] = useState(null);
 
 	const [items, setItems] = useState(null);
 	useEffect(() => {
@@ -93,16 +94,26 @@ export default function MarketBoard() {
 			});
 	}, []);
 
-	const [selectedItem, setSelectedItem] = useState(null);
+	const [itemIndex, setItemIndex] = useState(null);
 	useEffect(() => {
-		if (items && selectedItem) {
-			console.log(items.find(x => x.id === selectedItem[0]).name);
+		if (items && itemIndex) {
+			setSelectedItem(items.find(x => x.id === itemIndex[0]));
 		}
-	}, [selectedItem, items])
+	}, [itemIndex, items])
 
 	const handleQuantity = (e) => {
 		setQuantity(e.target.value);
 	};
+
+	const handlePurchase = (e) => {
+		e.preventDefault();
+
+		axiosInstance
+			.post('company/accounts/', {
+				item: selectedItem.id,
+				quantity: quantity,
+			});
+	}
 	
 	if (!items) return null;
 	if (!subcontractors) return null;
@@ -115,28 +126,38 @@ export default function MarketBoard() {
 			<Card className={classes.card}>
 				<CardContent>
 					<Grid container spacing={2}>
-						<Grid item alignContent="center" xs={8}>
+						<Grid item alignContent="center" xs={6}>
 							<Typography>
 								{selectedItem
-									? items.find(x => x.id === selectedItem[0]).name
+									? selectedItem.name
 									: "No item selected"
 								}
 							</Typography>
 						</Grid>
 						<Grid item xs={2}>
-							<form noValidate>
-								<TextField
-									required
-									id="quantity"
-									label="Quantity"
-									name="quantity"
-									type="number"
-									onChange={handleQuantity}
-								/>
-							</form>
+							<TextField
+								required
+								id="quantity"
+								label="Quantity"
+								name="quantity"
+								type="number"
+								onChange={handleQuantity}
+							/>
 						</Grid>
 						<Grid item xs={2}>
-							<Button variant="contained" color="primary">
+							<Typography>
+								{selectedItem
+									? `Total: £${selectedItem.price * quantity}`
+									: "Total: "
+								}
+							</Typography>
+						</Grid>
+						<Grid item xs={2}>
+							<Button 
+								variant="contained" 
+								color="primary"
+								onClick={handlePurchase}
+							>
 								Purchase
 							</Button>
 						</Grid>
@@ -155,8 +176,8 @@ export default function MarketBoard() {
 						price: item.price,
 					})
 				})}
-				onSelectionModelChange={(newSelectedItem) => {
-					setSelectedItem(newSelectedItem);
+				onSelectionModelChange={(newItemIndex) => {
+					setItemIndex(newItemIndex);
 				}}
 			/>
 		</React.Fragment>

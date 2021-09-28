@@ -4,4 +4,4 @@ from . import models
 
 @admin.register(models.Account)
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('id', 'type', 'item', 'quantity', 'total_price')
+    list_display = ('id', 'item', 'quantity', 'total_price')

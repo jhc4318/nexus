@@ -17,11 +17,6 @@ const columns = [
 		flex: 1,
 	},
 	{
-		field: 'type',
-		headerName: 'Type',
-		flex: 1,
-	},
-	{
 		field: 'item',
 		headerName: 'Item',
 		flex: 3,
@@ -37,10 +32,6 @@ const columns = [
 		flex: 2,
 	},
 ];
-
-function capitalizeFirstLetter(word) {
-    return word.charAt(0).toUpperCase() + word.slice(1);
-};
 
 export default function AccountsBoard() {
     const classes = useStyles();
@@ -74,7 +65,6 @@ export default function AccountsBoard() {
 				rows={accounts.map((account) => {
 					return ({
 						id: account.id,
-						type: capitalizeFirstLetter(account.type),
 						item: items.find(x => x.id === account.item).name, // Not very efficient at finding the item
 						quantity: account.quantity,
 						totalPrice: account.total_price,
