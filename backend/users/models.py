@@ -35,7 +35,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     user_name = models.CharField(max_length=50, unique=True)
     email = models.EmailField(_('email address'), unique=True)
     start_date = models.DateTimeField(default=timezone.now)
-    tasks = models.ManyToManyField(Task)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
