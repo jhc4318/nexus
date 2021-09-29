@@ -126,7 +126,7 @@ export default function MarketBoard() {
 			<Card className={classes.card}>
 				<CardContent>
 					<Grid container spacing={2}>
-						<Grid item alignContent="center" xs={6}>
+						<Grid item xs={6}>
 							<Typography>
 								{selectedItem
 									? selectedItem.name

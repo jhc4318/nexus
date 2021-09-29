@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import axiosInstance from './axios';
 import { 
-	BrowserRouter as Router,
 	Switch,
 	Route,
+	useHistory
 } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
 import {
 	AppBar, 
+	Button, 
 	CssBaseline, 
 	Divider, 
 	Drawer,  
@@ -44,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	toolbar: {
 		paddingRight: 24, // keep right padding when drawer closed
+		justifyContent: 'space-between',
 	},
 	toolbarIcon: {
 		display: 'flex',
@@ -119,7 +122,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function App() {
 	const classes = useStyles();
+	const history = useHistory();
 	
+	console.log(history)
 	const [open, setOpen] = useState(true);
 	const handleDrawerClose = () => {
 		setOpen(false);
@@ -128,138 +133,150 @@ export default function App() {
 		setOpen(true);
 	};
 
-	// let location = useLocation();
-	// console.log(location);
+	const handleLogout = () => {
+		console.log(history)
+		axiosInstance
+			.post('users/logout/blacklist/', {
+            	refresh_token: localStorage.getItem('refresh_token'),
+        });
+		localStorage.clear();
+        axiosInstance.defaults.headers['Authorization'] = null;
+        history.push('/login');
+	};
 
 	return (
 		<div className={classes.root}>
-			<React.StrictMode>
-				<Router>
-					<CssBaseline />
-					<AppBar 
-						position="absolute"
-						color="default"
-						className={clsx(classes.appBar, open && classes.appBarShift)}
+			<React.Fragment>
+				<CssBaseline />
+				<AppBar 
+					position="absolute"
+					color="default"
+					className={clsx(classes.appBar, open && classes.appBarShift)}
+				>
+					<Toolbar className={classes.toolbar}>
+						<IconButton
+							edge='start'
+							color='inherit'
+							aria-label='open drawer'
+							onClick={handleDrawerOpen}
+							className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+						>
+							<MenuIcon />
+						</IconButton>
+						<Typography
+							component="h1"
+							variant="h6"
+							color="inherit"
+							noWrap
+							sx={{ flexGrow: 1}}
+						>
+							{`Nexus`}
+						</Typography>
+						<Button
+							variant="contained"
+							color="primary"
+							onClick={handleLogout}
+						>
+							Logout
+						</Button>
+					</Toolbar>
+				</AppBar>
+				<Drawer 
+					variant="permanent"
+					classes={{
+						paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+					}}
+					open={open}
+				>
+					<div className={classes.toolbarIcon}>
+						<IconButton 
+							onClick={handleDrawerClose}
+						>
+							<ChevronLeftIcon />
+						</IconButton>
+					</div>	
+					<Divider />
+					<ListItem
+						button
+						component={NavLink}
+						to='/'
 					>
-						<Toolbar className={classes.toolbar}>
-							<IconButton
-								edge='start'
-								color='inherit'
-								aria-label='open drawer'
-								onClick={handleDrawerOpen}
-								className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-							>
-								<MenuIcon />
-							</IconButton>
-							<Typography
-								component="h1"
-								variant="h6"
-								color="inherit"
-								noWrap
-								sx={{ flexGrow: 1}}
-							>
-								{`Nexus`}
-							</Typography>
-							
-						</Toolbar>
-					</AppBar>
-					<Drawer 
-						variant="permanent"
-						classes={{
-							paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-						}}
-						open={open}
+						<ListItemIcon>
+							<DashboardIcon />
+						</ListItemIcon>
+						<ListItemText primary='Dashboard' />
+					</ListItem>
+					<Divider />
+					<ListItem
+						button
+						component={NavLink}
+						to='/tasks'
 					>
-						<div className={classes.toolbarIcon}>
-							<IconButton 
-								onClick={handleDrawerClose}
-							>
-								<ChevronLeftIcon />
-							</IconButton>
-						</div>	
-						<Divider />
-						<ListItem
-							button
-							component={NavLink}
-							to='/'
-						>
-							<ListItemIcon>
-								<DashboardIcon />
-							</ListItemIcon>
-							<ListItemText primary='Dashboard' />
-						</ListItem>
-						<Divider />
-						<ListItem
-							button
-							component={NavLink}
-							to='/tasks'
-						>
-							<ListItemIcon>
-								<FormatListBulletedIcon />
-							</ListItemIcon>
-							<ListItemText primary='Tasks' />
-						</ListItem>
-						<Divider />
-						<ListItem
-							button
-							component={NavLink}
-							to='/users'
-						>
-							<ListItemIcon>
-								<GroupIcon />
-							</ListItemIcon>
-							<ListItemText primary='Users' />
-						</ListItem>
-						<Divider />
-						<ListItem
-							button
-							component={NavLink}
-							to='/request-for-proposal'
-						>
-							<ListItemIcon>
-								<PriorityHighIcon />
-							</ListItemIcon>
-							<ListItemText primary='Request for Proposal' />
-						</ListItem>
-						<Divider />
-						<ListItem
-							button
-							component={NavLink}
-							to='/market'
-						>
-							<ListItemIcon>
-								<ShoppingCartIcon />
-							</ListItemIcon>
-							<ListItemText primary='Market' />
-						</ListItem>
-						<Divider />
-						<ListItem
-							button
-							component={NavLink}
-							to='/accounts'
-						>
-							<ListItemIcon>
-								<AccountBalanceWalletIcon />
-							</ListItemIcon>
-							<ListItemText primary='Accounts' />
-						</ListItem>
-						<Divider />
-					</Drawer>
-					<main className={classes.content}>
-						<div className={classes.appBarSpacer} />
-						<Switch>
-							<Route exact path='/login' component={SignIn} />
-							<PrivateRoute path='/'>
-								<Route exact path='/tasks' component={TaskBoard} />
-								<Route exact path='/request-for-proposal' component={RequestForProposal} />
-								<Route exact path='/users' component={UserDisplay} />
-								<Route exact path='/market' component={MarketBoard} />
-								<Route exact path='/accounts' component={AccountsBoard} />
-							</PrivateRoute>
-						</Switch>
-					</main>
-				</Router>
-			</React.StrictMode>
+						<ListItemIcon>
+							<FormatListBulletedIcon />
+						</ListItemIcon>
+						<ListItemText primary='Tasks' />
+					</ListItem>
+					<Divider />
+					<ListItem
+						button
+						component={NavLink}
+						to='/users'
+					>
+						<ListItemIcon>
+							<GroupIcon />
+						</ListItemIcon>
+						<ListItemText primary='Users' />
+					</ListItem>
+					<Divider />
+					<ListItem
+						button
+						component={NavLink}
+						to='/request-for-proposal'
+					>
+						<ListItemIcon>
+							<PriorityHighIcon />
+						</ListItemIcon>
+						<ListItemText primary='Request for Proposal' />
+					</ListItem>
+					<Divider />
+					<ListItem
+						button
+						component={NavLink}
+						to='/market'
+					>
+						<ListItemIcon>
+							<ShoppingCartIcon />
+						</ListItemIcon>
+						<ListItemText primary='Market' />
+					</ListItem>
+					<Divider />
+					<ListItem
+						button
+						component={NavLink}
+						to='/accounts'
+					>
+						<ListItemIcon>
+							<AccountBalanceWalletIcon />
+						</ListItemIcon>
+						<ListItemText primary='Accounts' />
+					</ListItem>
+					<Divider />
+				</Drawer>
+				<main className={classes.content}>
+					<div className={classes.appBarSpacer} />
+					<Switch>
+						<Route exact path='/login' component={SignIn} />
+						<PrivateRoute path='/'>
+							<Route exact path='/tasks' component={TaskBoard} />
+							<Route exact path='/request-for-proposal' component={RequestForProposal} />
+							<Route exact path='/users' component={UserDisplay} />
+							<Route exact path='/market' component={MarketBoard} />
+							<Route exact path='/accounts' component={AccountsBoard} />
+						</PrivateRoute>
+					</Switch>
+				</main>
+			</React.Fragment>
 		</div>
 	);
 }
